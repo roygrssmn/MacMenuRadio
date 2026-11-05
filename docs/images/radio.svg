@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="MacMenuRadio radio illustration">
+  <rect width="256" height="256" rx="56" fill="#11263b"/>
+  <path d="M68 82L193 39" fill="none" stroke="#7dd3fc" stroke-width="10" stroke-linecap="round"/>
+  <rect x="39" y="77" width="178" height="135" rx="23" fill="#f1f5f9"/>
+  <rect x="57" y="94" width="142" height="27" rx="7" fill="#23445f"/>
+  <path d="M70 107h113m-83-7v14m38-14v14m29-14v14" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="100" cy="165" r="31" fill="#23445f"/>
+  <circle cx="100" cy="165" r="18" fill="#426580"/>
+  <circle cx="171" cy="155" r="12" fill="#1684bc"/>
+  <path d="M157 184h27" stroke="#23445f" stroke-width="6" stroke-linecap="round"/>
+</svg>

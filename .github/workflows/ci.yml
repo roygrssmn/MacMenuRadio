@@ -1,0 +1,40 @@
+name: MacMenuRadio CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    name: Test and build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-15-intel]
+    defaults:
+      run:
+        shell: sh
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Reject committed personal stations
+        run: |
+          if git ls-files --error-unmatch -- stations.json >/dev/null 2>&1; then
+            echo "Keep personal stations.json out of Git. Commit stations.json.example instead." >&2
+            exit 1
+          fi
+      - name: Run configuration and recovery tests
+        run: /bin/sh ./check.sh
+      - name: Build universal app
+        run: /bin/sh ./build.sh
+      - name: Verify app bundle
+        run: |
+          plutil -lint Info.plist
+          codesign --verify --strict "build/MacMenuRadio.app"
+          xcrun lipo "build/MacMenuRadio.app/Contents/MacOS/MacMenuRadio" -verify_arch arm64
+          xcrun lipo "build/MacMenuRadio.app/Contents/MacOS/MacMenuRadio" -verify_arch x86_64
